@@ -12,7 +12,6 @@
 // Views
 #include "src/app/views/MainView.hpp"
 #include "src/app/views/HomeView.hpp"
-#include "src/app/views/RepositoryView.hpp"
 
 struct App
 {
