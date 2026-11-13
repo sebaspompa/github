@@ -1,8 +1,9 @@
-#include <iostream>
+#include "src/app/App.hpp"
 
 int main()
 {
-    std::cout << "github console\n";
-
+    App app;
+    app.run();
+    
     return 0;
 }
