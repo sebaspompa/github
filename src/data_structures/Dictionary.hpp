@@ -180,4 +180,29 @@ public:
         const auto &buckets = hashTable.elements();
         return const_iterator(buckets.end(), buckets.end());
     }
+
+    Value &operator[](const Key &key)
+    {
+        Value *ptr = hashTable.find(key);
+
+        if (ptr == nullptr)
+        {
+            hashTable.insert(key, Value{});
+            ptr = hashTable.find(key);
+        }
+
+        return *ptr;
+    }
+
+    const Value &operator[](const Key &key) const
+    {
+        const Value *ptr = hashTable.find(key);
+
+        if (ptr == nullptr)
+        {
+            throw std::out_of_range("La clave no existe en el diccionario");
+        }
+
+        return *ptr;
+    }
 };
