@@ -260,7 +260,7 @@ public:
     {
         if (input.length() < 1)
         {
-            throw runtime_error("Entrada vacia.");
+            throw std::runtime_error("Entrada vacia.");
         }
 
         compression(input);
