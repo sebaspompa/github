@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 using std::string;
 using std::vector;
@@ -116,6 +117,29 @@ private:
         //  - Se realiza `c` iteraciones de `sipRound`
         //  - Se opera con el 'word' interno `v0`
         for (size_t i = 0; i < w; i++)
+        {
+            littleEndian(blocks[i]);
+
+            v3 ^= blocks[i];
+
+            executeSipRound(c);
+
+            v0 ^= blocks[i];
+        }
+    }
+
+    void compression(const uint64_t &input)
+    {
+        constexpr uint8_t w = 2;
+
+        uint64_t blocks[w] = { input, 0x08 };
+
+        // Para cada bloque `m_i`:
+        //  - Se transforma a 'litte-endian'
+        //  - Se opera con el 'word' interno `v3`
+        //  - Se realiza `c` iteraciones de `sipRound`
+        //  - Se opera con el 'word' interno `v0`
+        for (uint8_t i = 0; i < w; i++)
         {
             littleEndian(blocks[i]);
 
@@ -239,6 +263,12 @@ public:
             throw runtime_error("Entrada vacia.");
         }
 
+        compression(input);
+        finalization();
+    }
+
+    void combine(const uint64_t &input)
+    {
         compression(input);
         finalization();
     }
