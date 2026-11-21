@@ -3,12 +3,12 @@
 #include <string>
 #include <algorithm>
 
-#include "src/engine/terminal/ansi.hpp"
 #include "src/engine/core/Point.hpp"
 #include "src/engine/core/Rect.hpp"
 #include "src/engine/utils.hpp"
 #include "src/engine/input/Event.hpp"
 #include "src/engine/rendering/Canvas.hpp"
+#include "src/engine/rendering/ansi.hpp"
 
 using std::string;
 using std::size_t;

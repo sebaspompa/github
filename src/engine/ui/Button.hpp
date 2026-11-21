@@ -4,7 +4,7 @@
 #include "src/engine/core/Rect.hpp"
 #include "src/engine/core/Size.hpp"
 #include "src/engine/input/Event.hpp"
-#include "src/engine/terminal/ansi.hpp"
+#include "src/engine/rendering/ansi.hpp"
 #include "src/engine/utils.hpp"
 #include "src/engine/rendering/Canvas.hpp"
 
