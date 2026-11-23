@@ -468,10 +468,71 @@ public:
         rebuildLinks();
     }
 
+    void mergeSort(Comparator predicate = &DoublyLinkedList::ascending)
+    {
+        if (!head || !head->next)
+        {
+            return;
+        }
+
+        head = _mergeSort(head, predicate);
+        rebuildLinks();
+    }
+
+private:
+    static Node* _merge(Node* left, Node* right, const Comparator& predicate)
+    {
+        Node* result = nullptr;
+        Node** last = &result;
+
+        while (left != nullptr && right != nullptr)
+        {
+            if (predicate(left->data, right->data))
+            {
+                *last = right;
+                right = right->next;
+            }
+            else
+            {
+                *last = left;
+                left = left->next;
+            }
+            last = &(*last)->next;
+        }
+
+        *last = (left != nullptr) ? left : right;
+        return result;
+    }
+
+    static Node* _mergeSort(Node* node, const Comparator& predicate)
+    {
+        if (node == nullptr || node->next == nullptr)
+        {
+            return node;
+        }
+
+        Node* slow = node;
+        Node* fast = node->next;
+        while (fast != nullptr && fast->next != nullptr)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        Node* right = slow->next;
+        slow->next = nullptr;
+
+        Node* sortedLeft = _mergeSort(node, predicate);
+        Node* sortedRight = _mergeSort(right, predicate);
+
+        return _merge(sortedLeft, sortedRight, predicate);
+    }
+
+public:
     // Ordena usando insercion, el algoritmo recomendado para esta lista.
     void sort(Comparator predicate = &DoublyLinkedList::ascending)
     {
-        insertionSort(predicate);
+        mergeSort(predicate);
     }
 
     void forEachFromLast(function<void(T&)> closure)
