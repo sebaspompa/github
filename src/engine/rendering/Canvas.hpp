@@ -12,8 +12,7 @@
 #include "src/engine/core/Rect.hpp"
 #include "src/engine/core/Size.hpp"
 
-// Terminal
-#include "src/engine/terminal/ansi.hpp"
+#include "src/engine/rendering/ansi.hpp"
 
 // Utils
 #include "src/engine/utils.hpp"

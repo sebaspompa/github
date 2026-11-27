@@ -159,6 +159,19 @@ public:
         return false;
     }
 
+    Value *find(const Key &key)
+    {
+        for (auto &element : buckets[hash(key)])
+        {
+            if (element.key == key)
+            {
+                return &element.value;
+            }
+        }
+
+        return nullptr;
+    }
+
     const Value* find(const Key &key) const
     {
         for (const auto &element : buckets[hash(key)])
